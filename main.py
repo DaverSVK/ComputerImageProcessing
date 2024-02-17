@@ -45,6 +45,37 @@ img2 = cv2.imread("test2.jpg")
 img3 = cv2.imread("test3.jpg")
 img4 = cv2.imread("test4.jpg")
 
+#TODO: Change vis image to Merged images it will not work like this
+vis = img1
+
+part2 = vis[240:480, 0:240]
+
+b1,g1,r1=cv2.split(part2)
+B2 = np.empty((240, 240), dtype=b1.dtype)
+R2 = np.empty((240, 240), dtype=r1.dtype)
+G2 = np.empty((240, 240), dtype=g1.dtype)
+cv2.imshow("druhy", part2)
+for i in range(240):
+    for ii in range(240):
+        B2[ii,239-i]=b1[i,ii]
+        R2[ii,239-i]=r1[i,ii]
+        G2[ii,239-i]=g1[i,ii]
+roto = cv2.merge([B2,G2,R2])
+cv2.imshow("roto", roto)
+vis[0:240, 0:240] = roto
+#TODO: Change all channels of BGR to 0 exept R
+
+#Convolution
+kernel1 = np.array([[1/9, 1/9, 1/9],
+                    [1/9, 1/9, 1/9],
+                    [1/9, 1/9, 1/9]])
+
+identity = cv2.filter2D(src=vis, ddepth=-1, kernel=kernel1)
+cv2.imshow("identity", identity)
+#TODO: show parameters
+print(vis.size)
+cv2.waitKey(0)
+
 
 # for i in range(10):
 #     #get data and pass them from camera to img
