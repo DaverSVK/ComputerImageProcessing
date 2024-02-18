@@ -45,19 +45,19 @@ img2 = cv2.imread("test2.jpg")
 img3 = cv2.imread("test3.jpg")
 img4 = cv2.imread("test4.jpg")
 
-#TODO: Change vis image to Merged images it will not work like this
-img1 = resize(img1, (240, 240))
-img2 = resize(img2, (240, 240))
-img3 = resize(img3, (240, 240))
-img4 = resize(img4, (240, 240))
+#Merged images
+img1 = cv2.resize(img1, (240, 240))
+img2 = cv2.resize(img2, (240, 240))
+img3 = cv2.resize(img3, (240, 240))
+img4 = cv2.resize(img4, (240, 240))
 
 top_row = np.hstack((img1, img2))
 low_row = np.hstack((img3, img4))
 
 vis = np.vstack((top_row, low_row))
 
+#Taking part of the image
 part2 = vis[240:480, 0:240]
-
 b1,g1,r1=cv2.split(part2)
 B2 = np.empty((240, 240), dtype=b1.dtype)
 R2 = np.empty((240, 240), dtype=r1.dtype)
@@ -71,12 +71,11 @@ for i in range(240):
 roto = cv2.merge([B2,G2,R2])
 cv2.imshow("roto", roto)
 vis[0:240, 0:240] = roto
-
-#TODO: Change all channels of BGR to 0 exept R
 cv2.imshow("merged", vis)
-b1,g1,r1=cv2.split(part2)
-cv2.imshow("cervik", b1)
 
+#Change all channels of BGR to 0 exept R
+b1,g1,r1=cv2.split(vis)
+cv2.imshow("cervik", b1)
 merged = cv2.merge([b1*0, g1*0, r1*1])
 cv2.imshow("merged2", merged)
 
@@ -87,7 +86,8 @@ kernel1 = np.array([[1/9, 1/9, 1/9],
 
 identity = cv2.filter2D(src=vis, ddepth=-1, kernel=kernel1)
 cv2.imshow("identity", identity)
-#TODO: show parameters
+
+#Show parameters
 print("sirka ", vis.shape[0])
 print("vyska ", vis.shape[1])
 print("pocet kanalov ", vis.shape[2])
