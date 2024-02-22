@@ -1,4 +1,4 @@
-from ximea import xiapi
+# from ximea import xiapi
 import cv2
 import numpy as np
 ### runn this command first echo 0|sudo tee /sys/module/usbcore/parameters/usbfs_memory_mb  ###
@@ -57,7 +57,7 @@ low_row = np.hstack((img3, img4))
 vis = np.vstack((top_row, low_row))
 
 #Taking part of the image
-part2 = vis[240:480, 0:240]
+part2 = vis[0:240,240:480]
 b1,g1,r1=cv2.split(part2)
 B2 = np.empty((240, 240), dtype=b1.dtype)
 R2 = np.empty((240, 240), dtype=r1.dtype)
@@ -70,23 +70,29 @@ for i in range(240):
         G2[ii,239-i]=g1[i,ii]
 roto = cv2.merge([B2,G2,R2])
 cv2.imshow("roto", roto)
-vis[0:240, 0:240] = roto
+vis[0:240,240:480] = roto
 cv2.imshow("merged", vis)
 
 #Change all channels of BGR to 0 exept R
-b1,g1,r1=cv2.split(vis)
+part3 = vis[240:480,0:240]
+b1,g1,r1=cv2.split(part3)
 cv2.imshow("cervik", b1)
-merged = cv2.merge([b1*0, g1*0, r1*1])
-cv2.imshow("merged2", merged)
+red = cv2.merge([b1*0, g1*0, r1*1])
+cv2.imshow("red", red)
+vis[240:480,0:240] = red
 
 #Convolution
-kernel1 = np.array([[1/9, 1/9, 1/9],
-                    [1/9, 1/9, 1/9],
-                    [1/9, 1/9, 1/9]])
+part3 = vis[0:240,0:240]
+kernel1 = np.array([[1, 1, 1],
+                    [0, 0, 0],
+                    [1, 1, 1]])
 
-identity = cv2.filter2D(src=vis, ddepth=-1, kernel=kernel1)
+identity = cv2.filter2D(src=part3, ddepth=-1, kernel=kernel1)
 cv2.imshow("identity", identity)
+vis[0:240,0:240] = identity
 
+
+cv2.imshow("Final", vis)
 #Show parameters
 print("sirka ", vis.shape[0])
 print("vyska ", vis.shape[1])
