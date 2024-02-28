@@ -1,2 +1,0 @@
-# ComputerImageProcessing
-PVSO
