@@ -17,7 +17,9 @@ b.].
 ## Užitočné odkazy:
 • Návod na kalibráciu kamery pomocou OpenCV knižnice:
 https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html
+
 • Práca s trackbarmi:
 https://docs.opencv.org/4.x/d9/dc8/tutorial_py_trackbar.html
+
 • Houghove kruhy: OpenCV - Hough Circle Transform
 https://docs.opencv.org/4.x/da/d53/tutorial_py_houghcircles.html
