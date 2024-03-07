@@ -45,14 +45,17 @@ po:(druha metoda)<br>
 tiez sme vdaka tomuto zistili parametre fx, fy, cx, cy pre kameru a to 126.142, 132.542, 95.555, 39.175. 
 
 ## Hladanie kruhov
-Z kniznice openCV sme pouzili uz dostupnu implementaciu Houghovej trasformacie, kde nastavujeme hodnoty parameter1 a parameter2, kde:<br> 
-parameter1 je vyuzuty na redukciu sumu pri detekcii vyraznych hran ktore by mohli byt sucastou kruhu, cize nastavuje hornu hranicu canny edge detectora a teda zalezi na kontraste kruhu s pozadim<br>
+Z kniznice openCV sme pouzili uz dostupnu implementaciu Houghovej trasformacie, kde nastavujeme hodnoty parameter1 a parameter2, kde:<br>
+-dp je stupen redukcie rozlisenia<br>
+-minDist je minimalna vzdialenost medzi stredmi detekovanych kruhov<br>
+-parameter1 je vyuzuty na redukciu sumu pri detekcii vyraznych hran ktore by mohli byt sucastou kruhu, cize nastavuje hornu hranicu -canny edge detectora a teda zalezi na kontraste kruhu s pozadim<br>
 parameter2 je vyuzity ako citlivost na velkost detekovanych kruhov (center detector) kde pri malej hodnote mozme dosiahnut mnozstvo falsepositives a pri vysokom cisle dosiahneme velku presnost pri detekovani kruhov avsak nemusime detekovat vsetky.<br>
+-minRadius je minimalna hodnota polomeru detekovanych kruhov<br>
+-maxRadius je maximalna hodnota polomeru detekovanych kruhov<br>
 Pre nastavenie hodnot tychto parametrov vyuzivame slidre, ktore su sucastou obrazku<br>
 Priklad:<br>
-https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/HoughCircles.png
 <p align="center">
-  <img src="https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/HoughCircles.png">
+  <img src="https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/HoughCirclesParam.png">
 </p> <br>
 
 
