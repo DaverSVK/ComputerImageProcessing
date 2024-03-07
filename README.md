@@ -27,6 +27,9 @@ https://docs.opencv.org/4.x/da/d53/tutorial_py_houghcircles.html
 # Dokumentacia
 ## Kalibracia kamery
 Na pracu s kamerou sme ju najprv potrebovali spravne nakalibrovat. Toho sme dosiahli tak, ze sme si nastudovali [navod](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html) na kalibraciu a kameru kalibrovali pomocou sachovnice.<br>
+Pouzili sme obe metody:<br>
+-undistortion<br>
+-remapping<br>
 pred:<br>
 <p align="center">
   <img src="https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/Recources/test8.jpg" width="250" height="250">
@@ -34,6 +37,10 @@ pred:<br>
 po:<br>
 <p align="center">
 <img src="https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/calibresult.png" width="250" height="250">
+</p><br>
+po:(druha metoda)<br>
+<p align="center">
+<img src="https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/calibresult2.png" width="250" height="250">
 </p><br>
 tiez sme vdaka tomuto zistili parametre fx, fy, cx, cy pre kameru a to 126.142, 132.542, 95.555, 39.175. 
 
@@ -43,5 +50,9 @@ parameter1 je vyuzuty na redukciu sumu pri detekcii vyraznych hran ktore by mohl
 parameter2 je vyuzity ako citlivost na velkost detekovanych kruhov (center detector) kde pri malej hodnote mozme dosiahnut mnozstvo falsepositives a pri vysokom cisle dosiahneme velku presnost pri detekovani kruhov avsak nemusime detekovat vsetky.<br>
 Pre nastavenie hodnot tychto parametrov vyuzivame slidre, ktore su sucastou obrazku<br>
 Priklad:<br>
+https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/HoughCircles.png
+<p align="center">
+  <img src="https://github.com/DaverSVK/ComputerImageProcessing/blob/Zadanie_2/HoughCircles.png">
+</p> <br>
 
 
