@@ -5,9 +5,12 @@ MACRO_CALIBRATION = True
 
 # Calibration
 if MACRO_CALIBRATION:
-    makeCameraPictures(20)
+    # makeCameraPictures(20)
     calibrateTheCameraUsingUdistortion()
 
 else:
     # Hough Circles
     startVideoFinding()
+
+
+

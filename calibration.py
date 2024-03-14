@@ -13,6 +13,7 @@ import numpy as np
 import glob
 
 
+
 #Function takes nOfPicks and will store them in "Recources/" as input it needs int number
 def makeCameraPictures(nOfPics):
     ### runn this command first echo 0|sudo tee /sys/module/usbcore/parameters/usbfs_memory_mb  ###
@@ -73,7 +74,7 @@ def calibrateTheCameraUsingUdistortion():
     # Arrays to store object points and image points from all the images.
     objpoints = [] # 3d point in real world space
     imgpoints = [] # 2d points in image plane.
-    images = glob.glob('*.jpeg')
+    images = glob.glob('Recources/*.jpg')
     u = 0
     for fname in images:
         u +=1
@@ -116,4 +117,4 @@ def calibrateTheCameraUsingUdistortion():
         error = cv2.norm(imgpoints[i], imgpoints2, cv2.NORM_L2)/len(imgpoints2)
         mean_error += error
     print( "total error: {}".format(mean_error/len(objpoints)) )
-
+    #
