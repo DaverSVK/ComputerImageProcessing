@@ -20,6 +20,24 @@ def konvoLUCIA(image, kernel):
             output[y, x] = sumis
 
     return output
+def vyhodnocovanieHran(image, threshold,theta):
+
+    output = np.zeros_like(image, dtype=np.uint8)
+
+    for i in range(1, image.shape[0] - 1):
+        for j in range(1, image.shape[1] - 1):
+            #Matica 3x3 chyba smer gradientu
+            # if(theta[i,j]<112.5 and theta[i,j]>=67.5)
+            #     if (image[i, j] >= image[i-1:i+2, j].max()):
+            #         output[i, j] = image[i, j]
+            #         print(theta[i,j])
+            # elif(theta[i,j]<67.5 and theta[i,j]>=22.5):
+            if (image[i, j] >= image[i-1:i+2, j].max())or(image[i, j] >= image[i-1:i+2, j].max()):
+                    output[i, j] = image[i, j]
+
+
+
+    return output
 
 maska = (1/159)*np.array([
     [2, 4, 5, 4, 2],
@@ -39,16 +57,26 @@ maska3 = np.array([
     [1, 0, -1]
 ])
 
-obrazek = cv2.imread("Recources/Tanjiro.png")
-
+obrazek = cv2.imread("Recources/nezuko.jpg")
 obrazekCV = cv2.cvtColor(obrazek, cv2.COLOR_BGR2GRAY)
+# obrazekMyor = cv2.GaussianBlur(obrazekCV,[5,5])
 obrazekMy = konvoLUCIA(obrazekCV, maska)
 obrazekVert = konvoLUCIA(obrazekMy, maska3)
 obrazekHoriz = konvoLUCIA(obrazekMy, maska2)
-obrazekMy = obrazekVert
+# sobelx = cv2.Sobel(obrazekMy,cv2.CV_64F,1,0,ksize=3)
+# # sobely = cv2.Sobel(obrazekMy,cv2.CV_64F,0,1,ksize=3)
+# sobelx = np.uint8(np.absolute(sobelx))
+# sobely = np.uint8(np.absolute(sobely))
+# # obrazekMy = obrazekVert+obrazekHoriz
+obrazekMyG = abs(obrazekVert+obrazekHoriz)
+theta = np.degrees(np.arctan(np.divide(obrazekVert, obrazekHoriz)))
+obrazekMY = vyhodnocovanieHran(obrazekMyG,0.8,theta)
 
 obrazekNOT = cv2.filter2D(src=obrazekMy, ddepth=-1, kernel=maska3)
-
-cv2.imshow("obrazekMy", obrazekMy)
+obrazekNOTC = cv2.Canny(obrazekMy, threshold1=100, threshold2=200)
+cv2.imshow("obrazekyMG", obrazekMyG)
+cv2.imshow("obrazekyM", obrazekMy)
+cv2.imshow("obrazekMy", obrazekMY)
 cv2.imshow("obrazekCV", obrazekNOT)
+cv2.imshow("obrazekCVC", obrazekNOTC)
 cv2.waitKey(0)
